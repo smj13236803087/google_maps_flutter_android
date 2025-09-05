@@ -62,5 +62,5 @@ android {
             }
         }
     }
-    namespace "io.flutter.plugins.googlemaps"
+    namespace = "io.flutter.plugins.googlemaps"
 }
