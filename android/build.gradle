@@ -23,7 +23,6 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 31
-    namespace "io.flutter.plugins.googlemaps"
     defaultConfig {
         minSdkVersion 20
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -63,4 +62,5 @@ android {
             }
         }
     }
+    namespace "io.flutter.plugins.googlemaps"
 }
