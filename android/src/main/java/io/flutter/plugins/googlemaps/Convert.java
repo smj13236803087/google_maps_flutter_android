@@ -24,7 +24,7 @@ import com.google.android.gms.maps.model.PatternItem;
 import com.google.android.gms.maps.model.RoundCap;
 import com.google.android.gms.maps.model.SquareCap;
 import com.google.android.gms.maps.model.Tile;
-import io.flutter.view.FlutterMain;
+import io.flutter.embedding.engine.loader.FlutterLoader; // 替换 FlutterMain
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -34,9 +34,8 @@ import java.util.Map;
 /** Conversions between JSON-like values and GoogleMaps data types. */
 class Convert {
 
-  // TODO(hamdikahloun): FlutterMain has been deprecated and should be replaced with FlutterLoader
-  //  when it's available in Stable channel: https://github.com/flutter/flutter/issues/70923.
-  @SuppressWarnings("deprecation")
+  private static final FlutterLoader flutterLoader = new FlutterLoader();
+
   private static BitmapDescriptor toBitmapDescriptor(Object o) {
     final List<?> data = toList(o);
     switch (toString(data.get(0))) {
@@ -49,15 +48,15 @@ class Convert {
       case "fromAsset":
         if (data.size() == 2) {
           return BitmapDescriptorFactory.fromAsset(
-              FlutterMain.getLookupKeyForAsset(toString(data.get(1))));
+              flutterLoader.getLookupKeyForAsset(toString(data.get(1))));
         } else {
           return BitmapDescriptorFactory.fromAsset(
-              FlutterMain.getLookupKeyForAsset(toString(data.get(1)), toString(data.get(2))));
+              flutterLoader.getLookupKeyForAsset(toString(data.get(1)), toString(data.get(2))));
         }
       case "fromAssetImage":
         if (data.size() == 3) {
           return BitmapDescriptorFactory.fromAsset(
-              FlutterMain.getLookupKeyForAsset(toString(data.get(1))));
+              flutterLoader.getLookupKeyForAsset(toString(data.get(1))));
         } else {
           throw new IllegalArgumentException(
               "'fromAssetImage' Expected exactly 3 arguments, got: " + data.size());
@@ -111,8 +110,8 @@ class Convert {
       case "newLatLngZoom":
         return CameraUpdateFactory.newLatLngZoom(toLatLng(data.get(1)), toFloat(data.get(2)));
       case "scrollBy":
-        return CameraUpdateFactory.scrollBy( //
-            toFractionalPixels(data.get(1), density), //
+        return CameraUpdateFactory.scrollBy(
+            toFractionalPixels(data.get(1), density),
             toFractionalPixels(data.get(2), density));
       case "zoomBy":
         if (data.size() == 2) {
