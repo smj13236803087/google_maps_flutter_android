@@ -15,7 +15,10 @@ allprojects {
         mavenCentral()
     }
 }
-
+android {
+    namespace "io.flutter.plugins.googlemaps"
+    compileSdkVersion 34
+}
 rootProject.buildDir = '../build'
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
