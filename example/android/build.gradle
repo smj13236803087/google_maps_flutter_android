@@ -16,7 +16,7 @@ allprojects {
     }
 }
 android {
-    namespace "io.flutter.plugins.googlemaps"
+    namespace "io.flutter.plugins.googlemapsexample"
     compileSdkVersion 34
 }
 rootProject.buildDir = '../build'

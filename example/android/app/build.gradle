@@ -25,7 +25,7 @@ apply plugin: 'com.android.application'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-    namespace "io.flutter.plugins.googlemaps"
+    namespace "io.flutter.plugins.googlemapsexample"
     compileSdkVersion 31
 
     lintOptions {
